@@ -6,6 +6,9 @@ import pandas as pd
 data_path = r"C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\datasets\household_power_consumption_original.csv"
 data = pd.read_csv(data_path, sep=',', low_memory=False, na_values=['nan', '?'])
 
+print(f"Data shape: {data.shape}")
+
+
 # Display the first few rows of the dataset
 print(data.head())
 

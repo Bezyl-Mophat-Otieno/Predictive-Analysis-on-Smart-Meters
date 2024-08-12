@@ -2,3 +2,6 @@
 *.csv 
 *.txt
 *.npz
+*.keras
+*.h5
+*.pkl

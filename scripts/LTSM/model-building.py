@@ -7,7 +7,7 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping
 
 # Load the sequences
-data_path = r"C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\datasets\household_power_consumption_sequences.npz"
+data_path = r"C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\outputs\sequences\train_sequences.npz"
 data = np.load(data_path)
 X, y = data['X'], data['y']
 
@@ -41,6 +41,6 @@ history = model.fit(
 )
 
 # Save the model
-model.save(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\models\lstm_model1.h5')
+model.save(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\models\lstm_new_model.h5')
 
 print("Model training complete and saved.")

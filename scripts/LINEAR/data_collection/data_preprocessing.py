@@ -22,18 +22,20 @@ def preprocess_data(input_csv, output_dir, file_name):
     # Set the datetime as the index
     data.set_index('Datetime', inplace=True)
     
-    # Drop the original Global_reactive_power,Sub_metering_3 , Date and Time columns as they are no longer needed
+    # Drop the original Global_reactive_power, Sub_metering_3, Date, and Time columns
     data.drop(['Date', 'Time', 'Global_reactive_power', 'Sub_metering_3'], axis=1, inplace=True)
     
-        # Rename columns to simpler names
+    # Rename columns to simpler names
     data.rename(columns={
         'Global_active_power': 'Power',
-        'Global_reactive_power': 'Reactive_Power',
         'Voltage': 'Voltage',
         'Global_intensity': 'Current',
         'Sub_metering_1': 'Load_Kitchen',
         'Sub_metering_2': 'Load_Laundry',
     }, inplace=True)
+    
+    # Handle non-numeric values by converting all columns to numeric and coercing errors
+    data = data.apply(pd.to_numeric, errors='coerce')
     
     # Handle missing values by removing rows with any missing values
     data_cleaned = data.dropna()

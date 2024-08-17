@@ -35,8 +35,8 @@ def prepare_data(input_csv, output_dir):
 
 if __name__ == "__main__":
     # Define the input file and output directory for data preparation
-    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\preprocessed_household_power_consumption.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data'
+    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data\manipulated_smart_meter_data.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data'
     
     # Ensure the output directory exists
     if not os.path.exists(output_directory):

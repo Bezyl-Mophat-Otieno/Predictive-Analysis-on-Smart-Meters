@@ -51,33 +51,6 @@ def evaluate_model(X_test_csv, y_test_csv, model_file, predictions_file, evaluat
             f.write(f"{key}: {value}\n")
     print(f"Evaluation metrics have been saved to {evaluation_file}")
 
-    # Downsample data for plotting if needed
-    sample_size = 10000
-    if len(y_test) > sample_size:
-        indices = np.random.choice(len(y_test), size=sample_size, replace=False)
-        y_test_sample = y_test.iloc[indices]
-        y_pred_sample = y_pred[indices]
-        dates_sample = y_test.index[indices]
-    else:
-        y_test_sample = y_test
-        y_pred_sample = y_pred
-        dates_sample = y_test.index
-
-    # Plot predictions vs. actual values
-    plt.figure(figsize=(12, 6))
-    plt.plot(dates_sample, y_test_sample, label='Actual', color='blue', alpha=0.5)
-    plt.plot(dates_sample, y_pred_sample, label='Predicted', color='red', linestyle='--', alpha=0.5)
-    plt.xlabel('Datetime')
-    plt.ylabel('Value')
-    plt.title('Actual vs. Predicted Values')
-    plt.legend()
-    plt.grid(True)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.savefig('predictions_vs_actual.png')
-    plt.close()  # Use plt.close() to free up memory
-    print("Plot saved as 'predictions_vs_actual.png'")
-
 if __name__ == "__main__":
     # Define file paths
     X_test_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\X_test.csv'

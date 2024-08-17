@@ -15,8 +15,8 @@ def generate_price_predictions(predictions_csv, output_dir, price_per_kwh):
     data = pd.read_csv(predictions_csv, index_col='Datetime', parse_dates=True)
     
     # Calculate actual and predicted prices using the constant price per kWh
-    data['Actual_Price'] = data['Actual'] * price_per_kwh
-    data['Predicted_Price'] = data['Predicted'] * price_per_kwh
+    data['Actual_Cost'] = data['Actual'] * price_per_kwh
+    data['Predicted_Cost'] = data['Predicted'] * price_per_kwh
     
     # Extract relevant time features
     data['Hour'] = data.index.hour
@@ -25,22 +25,22 @@ def generate_price_predictions(predictions_csv, output_dir, price_per_kwh):
     
     # Aggregate price predictions by hour of the day
     hourly_stats = data.groupby('Hour').agg({
-        'Actual_Price': ['mean', 'sum'],
-        'Predicted_Price': ['mean', 'sum']
+        'Actual_Cost': ['mean', 'sum'],
+        'Predicted_Cost': ['mean', 'sum']
     })
     hourly_stats.columns = ['_'.join(col) for col in hourly_stats.columns]
     
     # Aggregate price predictions by day of the week
     daily_stats = data.groupby('DayOfWeek').agg({
-        'Actual_Price': ['mean', 'sum'],
-        'Predicted_Price': ['mean', 'sum']
+        'Actual_Cost': ['mean', 'sum'],
+        'Predicted_Cost': ['mean', 'sum']
     })
     daily_stats.columns = ['_'.join(col) for col in daily_stats.columns]
     
     # Aggregate price predictions by month of the year
     monthly_stats = data.groupby('Month').agg({
-        'Actual_Price': ['mean', 'sum'],
-        'Predicted_Price': ['mean', 'sum']
+        'Actual_Cost': ['mean', 'sum'],
+        'Predicted_Cost': ['mean', 'sum']
     })
     monthly_stats.columns = ['_'.join(col) for col in monthly_stats.columns]
     
@@ -59,39 +59,45 @@ def generate_price_predictions(predictions_csv, output_dir, price_per_kwh):
     print("Monthly Price Statistics:\n", monthly_stats)
     
     # Plotting the price statistics
-    plt.figure(figsize=(12, 8))
+    plt.figure(figsize=(14, 12))  # Increase the figure size
 
     # Plot hourly price statistics
     plt.subplot(3, 1, 1)
-    plt.plot(hourly_stats.index, hourly_stats['Actual_Price_mean'], label='Actual Price', color='blue')
-    plt.plot(hourly_stats.index, hourly_stats['Predicted_Price_mean'], label='Predicted Price', color='red', linestyle='--')
-    plt.title('Average Price by Hour of the Day')
+    plt.plot(hourly_stats.index, hourly_stats['Actual_Cost_mean'], label='Actual Cost', color='blue')
+    plt.plot(hourly_stats.index, hourly_stats['Predicted_Cost_mean'], label='Predicted Cost', color='red', linestyle='--')
+    plt.title('Average Cost by Hour of the Day')
     plt.xlabel('Hour of the Day')
-    plt.ylabel('Price (KSH)')
-    plt.legend()
+    plt.ylabel('Cost (KSH)')
+    plt.xticks(fontsize=10)  # Adjust x-axis label size
+    plt.yticks(fontsize=10)  # Adjust y-axis label size
+    plt.legend(fontsize=10)
     plt.grid(True)
     
     # Plot daily price statistics
     plt.subplot(3, 1, 2)
-    plt.plot(daily_stats.index, daily_stats['Actual_Price_mean'], label='Actual Price', color='blue')
-    plt.plot(daily_stats.index, daily_stats['Predicted_Price_mean'], label='Predicted Price', color='red', linestyle='--')
-    plt.title('Average Price by Day of the Week')
+    plt.plot(daily_stats.index, daily_stats['Actual_Cost_mean'], label='Actual Cost', color='blue')
+    plt.plot(daily_stats.index, daily_stats['Predicted_Cost_mean'], label='Predicted Cost', color='red', linestyle='--')
+    plt.title('Average Cost by Day of the Week')
     plt.xlabel('Day of the Week (0=Monday, 6=Sunday)')
-    plt.ylabel('Price (KSH)')
-    plt.legend()
+    plt.ylabel('Cost (KSH)')
+    plt.xticks(fontsize=10)  # Adjust x-axis label size
+    plt.yticks(fontsize=10)  # Adjust y-axis label size
+    plt.legend(fontsize=10)
     plt.grid(True)
     
     # Plot monthly price statistics
     plt.subplot(3, 1, 3)
-    plt.plot(monthly_stats.index, monthly_stats['Actual_Price_mean'], label='Actual Price', color='blue')
-    plt.plot(monthly_stats.index, monthly_stats['Predicted_Price_mean'], label='Predicted Price', color='red', linestyle='--')
-    plt.title('Average Price by Month of the Year')
+    plt.plot(monthly_stats.index, monthly_stats['Actual_Cost_mean'], label='Actual Cost', color='blue')
+    plt.plot(monthly_stats.index, monthly_stats['Predicted_Cost_mean'], label='Predicted Cost', color='red', linestyle='--')
+    plt.title('Average Cost by Month of the Year')
     plt.xlabel('Month')
-    plt.ylabel('Price (KSH)')
-    plt.legend()
+    plt.ylabel('Cost (KSH)')
+    plt.xticks(fontsize=10, rotation=45)  # Adjust x-axis label size and rotation
+    plt.yticks(fontsize=10)  # Adjust y-axis label size
+    plt.legend(fontsize=10)
     plt.grid(True)
     
-    plt.tight_layout()
+    plt.tight_layout(pad=4.0)  # Add padding between subplots
     plt.savefig(os.path.join(output_dir, 'price_statistics.png'))
     plt.show()
     print("Plots saved as 'price_statistics.png'")

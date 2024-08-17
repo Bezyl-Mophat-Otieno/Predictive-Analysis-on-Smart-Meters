@@ -30,8 +30,8 @@ def preprocess_data(input_csv, output_dir, file_name):
         'Global_active_power': 'Power',
         'Voltage': 'Voltage',
         'Global_intensity': 'Current',
-        'Sub_metering_1': 'Load_Kitchen',
-        'Sub_metering_2': 'Load_Laundry',
+        'Sub_metering_1': 'Load_1',
+        'Sub_metering_2': 'Load_2',
     }, inplace=True)
     
     # Handle non-numeric values by converting all columns to numeric and coercing errors

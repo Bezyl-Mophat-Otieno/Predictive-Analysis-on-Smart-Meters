@@ -9,7 +9,7 @@ def get_user_input():
     end_date = input("Enter the end date (YYYY-MM-DD): ")
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
     end_date = datetime.strptime(end_date, "%Y-%m-%d")
-    granularity = input("Enter the granularity (hourly/daily): ").strip().lower()
+    granularity = input("Enter the granularity (hourly/daily/monthly): ").strip().lower()
     price_per_kwh = float(input("Enter the electricity price per kWh: "))
     return start_date, end_date, granularity, price_per_kwh
 
@@ -31,9 +31,9 @@ def load_model(model_path):
     return model
 
 def load_statistics(output_dir):
-    hourly_stats = pd.read_csv(os.path.join(output_dir, 'hourly_statistics.csv'), index_col=0)
-    daily_stats = pd.read_csv(os.path.join(output_dir, 'daily_statistics.csv'), index_col=0)
-    monthly_stats = pd.read_csv(os.path.join(output_dir, 'monthly_statistics.csv'), index_col=0)
+    hourly_stats = pd.read_csv(os.path.join(output_dir, 'hourly_power_statistics.csv'), index_col=0)
+    daily_stats = pd.read_csv(os.path.join(output_dir, 'daily_power_statistics.csv'), index_col=0)
+    monthly_stats = pd.read_csv(os.path.join(output_dir, 'monthly_power_statistics.csv'), index_col=0)
     return hourly_stats, daily_stats, monthly_stats
 
 def refine_prediction(features_df, model, hourly_stats, daily_stats, monthly_stats, granularity):
@@ -89,7 +89,7 @@ def main():
     model_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\model\linear_regression_model.pkl'
     model = load_model(model_path)
     
-    output_dir = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\plots'
+    output_dir = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\power_statistics'
     hourly_stats, daily_stats, monthly_stats = load_statistics(output_dir)
     
     predicted_power = refine_prediction(features_df, model, hourly_stats, daily_stats, monthly_stats, granularity)

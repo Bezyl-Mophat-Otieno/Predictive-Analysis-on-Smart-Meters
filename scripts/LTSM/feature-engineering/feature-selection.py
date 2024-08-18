@@ -35,5 +35,6 @@ data_cleaned['Lag_24'] = data_cleaned['Global_active_power'].shift(24)
 data_cleaned.dropna(inplace=True)
 
 # Save the dataset with engineered features
-output_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\datasets\household_power_consumption_features.csv'
+output_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\outputs\data\household_power_consumption_features.csv'
 data_cleaned.to_csv(output_path, index=False)
+print(f"Engineered features saved to {output_path}")

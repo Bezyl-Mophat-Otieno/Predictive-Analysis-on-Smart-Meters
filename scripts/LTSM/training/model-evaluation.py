@@ -10,8 +10,8 @@ import seaborn as sns
 import os
 
 # Load the scaled test data
-X_test_scaled = pd.read_csv(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\datasets\household_power_consumption_scaled_test_features.csv').values
-y_test = pd.read_csv(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\datasets\household_power_consumption_scaled_test_target.csv').values
+X_test_scaled = pd.read_csv(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\outputs\data\test_scaled_features.csv').values
+y_test = pd.read_csv(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\outputs\data\test_scaled_target.csv').values
 
 # Load the saved scalers
 scaler_X = joblib.load(r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scalers\test-scaler_X.pkl')
@@ -33,7 +33,7 @@ print(f"Reshaped X_test shape: {X_test_reshaped.shape}")
 print(f"Reshaped y_test shape: {y_test_reshaped.shape}")
 
 # Load the trained model
-model_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\models\lstm_model1.h5'
+model_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\models\lstm_new_model.h5'
 model = load_model(model_path)
 
 # Make predictions
@@ -62,7 +62,7 @@ print(f"Mean Absolute Error (MAE): {mae}")
 print(f"Root Mean Squared Error (RMSE): {rmse}")
 
 # Save the predictions to a CSV file
-predictions_output_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\datasets\predictions.csv'
+predictions_output_path = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\outputs\data\predictions.csv'
 pd.DataFrame(y_pred, columns=['Predicted_Global_active_power']).to_csv(predictions_output_path, index=False)
 
 print(f"Predictions saved to {predictions_output_path}")

@@ -52,8 +52,8 @@ def preprocess_data(input_csv, output_dir, file_name):
 
 if __name__ == "__main__":
     # Define the input file, output directory, and output file name
-    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\raw_household_power_consumption.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data'
+    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\raw_household_power_consumption.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data'
     output_file_name = 'preprocessed_household_power_consumption.csv'
     
     # Ensure the output directory exists

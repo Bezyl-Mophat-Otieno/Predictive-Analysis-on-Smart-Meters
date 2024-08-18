@@ -34,7 +34,7 @@ def load_and_explore_data(file_path, output_dir, file_name):
 if __name__ == "__main__":
     # Define the file paths and directory
     input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\datasets\household_power_consumption.txt'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data'
     output_file_name = 'raw_household_power_consumption.csv'
     
     # Ensure the output directory exists

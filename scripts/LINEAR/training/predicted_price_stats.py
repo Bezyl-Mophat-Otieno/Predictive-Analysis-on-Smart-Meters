@@ -104,8 +104,8 @@ def generate_price_predictions(predictions_csv, output_dir, price_per_kwh):
 
 if __name__ == "__main__":
     # Define file paths
-    predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\model_predictions.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\price_statistics'
+    predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\model_predictions.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\price_statistics'
     
     # Set price per kWh
     price_per_kwh = 23.25  # KSH per kWh

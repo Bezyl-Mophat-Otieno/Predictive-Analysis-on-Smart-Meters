@@ -73,8 +73,8 @@ def perform_eda(input_csv, output_dir):
 
 if __name__ == "__main__":
     # Define the input file and output directory for EDA plots
-    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\preprocessed_household_power_consumption.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\plots'
+    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\preprocessed_household_power_consumption.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\plots'
     
     # Ensure the output directory exists
     if not os.path.exists(output_directory):

@@ -16,7 +16,7 @@ def prepare_data(input_csv, output_dir):
     data = pd.read_csv(input_csv, index_col='Datetime', parse_dates=['Datetime'])
     
     # Define the features and target variable
-    features = ['Current', 'Voltage', 'Load_Kitchen', 'Load_Laundry']
+    features = ['Current', 'Voltage', 'Load_1', 'Load_2']
     target = 'Power'
     
     X = data[features]
@@ -35,8 +35,8 @@ def prepare_data(input_csv, output_dir):
 
 if __name__ == "__main__":
     # Define the input file and output directory for data preparation
-    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data\manipulated_smart_meter_data.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data'
+    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\preprocessed_household_power_consumption.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data'
     
     # Ensure the output directory exists
     if not os.path.exists(output_directory):

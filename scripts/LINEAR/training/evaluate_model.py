@@ -53,11 +53,11 @@ def evaluate_model(X_test_csv, y_test_csv, model_file, predictions_file, evaluat
 
 if __name__ == "__main__":
     # Define file paths
-    X_test_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data\X_test.csv'
-    y_test_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data\y_test.csv'
-    model_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\model\linear_regression_model.pkl'
-    predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data\model_predictions.csv'
-    evaluation_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\data_preparation\data\evaluation_metrics.txt'
+    X_test_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\X_test.csv'
+    y_test_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\y_test.csv'
+    model_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\model\linear_regression_model.pkl'
+    predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\model_predictions.csv'
+    evaluation_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\evaluation_metrics.txt'
     
     # Evaluate the model
     evaluate_model(X_test_file, y_test_file, model_file, predictions_file, evaluation_file)

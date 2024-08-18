@@ -50,11 +50,11 @@ def perform_eda(input_csv, output_dir):
     
     # Plotting Load - Kitchen and Laundry over time
     plt.figure(figsize=(12, 6))
-    plt.plot(data.index, data['Load_Kitchen'], label='Load - Kitchen', color='red')
-    plt.plot(data.index, data['Load_Laundry'], label='Load - Laundry', color='orange')
+    plt.plot(data.index, data['Load_1'], label='Load - 1', color='red')
+    plt.plot(data.index, data['Load_2'], label='Load - 2', color='orange')
     plt.xlabel('Datetime')
     plt.ylabel('Load (Wh)')
-    plt.title('Load - Kitchen and Laundry over Time')
+    plt.title('Load - 1 and 2 over Time')
     plt.legend()
     plt.grid(True)
     plt.savefig(os.path.join(output_dir, 'loads_over_time.png'))
@@ -73,8 +73,8 @@ def perform_eda(input_csv, output_dir):
 
 if __name__ == "__main__":
     # Define the input file and output directory for EDA plots
-    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\preprocessed_household_power_consumption.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\plots'
+    input_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\preprocessed_household_power_consumption.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\plots'
     
     # Ensure the output directory exists
     if not os.path.exists(output_directory):

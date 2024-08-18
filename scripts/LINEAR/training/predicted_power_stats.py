@@ -86,15 +86,15 @@ def generate_power_statistics(predictions_csv, output_dir):
     plt.legend()
     plt.grid(True)
     
-    plt.tight_layout()
+    plt.tight_layout(pad=4.0)  # Add padding between subplots
     plt.savefig(os.path.join(output_dir, 'power_statistics.png'))
     plt.show()
     print("Plots saved as 'power_statistics.png'")
 
 if __name__ == "__main__":
     # Define file paths
-    predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\data\model_predictions.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\outputs\power_statistics'
+    predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\model_predictions.csv'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\power_statistics'
     
     # Generate power statistics and plots
     generate_power_statistics(predictions_file, output_directory)

@@ -16,9 +16,6 @@ def perform_eda(input_csv, output_dir):
     # Load the preprocessed data
     data = pd.read_csv(input_csv, index_col='Datetime', parse_dates=['Datetime'])
     
-    # Convert non-numeric values to NaN
-    data.replace('?', pd.NA, inplace=True)
-    
     # Convert all columns to numeric types, errors='coerce' will turn non-numeric values into NaN
     data = data.apply(pd.to_numeric, errors='coerce')
     
@@ -48,16 +45,15 @@ def perform_eda(input_csv, output_dir):
     plt.savefig(os.path.join(output_dir, 'current_over_time.png'))
     plt.close()
     
-    # Plotting Load - Kitchen and Laundry over time
+    # Plotting Load (Sub_metering_3) over time
     plt.figure(figsize=(12, 6))
-    plt.plot(data.index, data['Load_1'], label='Load - 1', color='red')
-    plt.plot(data.index, data['Load_2'], label='Load - 2', color='orange')
+    plt.plot(data.index, data['Load(Wh)'], label='Load (Wh)', color='orange')
     plt.xlabel('Datetime')
     plt.ylabel('Load (Wh)')
-    plt.title('Load - 1 and 2 over Time')
+    plt.title('Load (Wh) over Time')
     plt.legend()
     plt.grid(True)
-    plt.savefig(os.path.join(output_dir, 'loads_over_time.png'))
+    plt.savefig(os.path.join(output_dir, 'load_over_time.png'))
     plt.close()
 
     # Correlation matrix

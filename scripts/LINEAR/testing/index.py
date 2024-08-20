@@ -8,7 +8,7 @@ import os
 MODEL_PATH = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\model\linear_regression_model.pkl'
 OUTPUT_DIR = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\plots\power_statistics'
 RESULTS_PATH = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\testing\predictions\predicted_costs_with_statistics.csv'
-AVERAGE_VALUES_FILE = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\average_values.csv'
+AVERAGE_VALUES_FILE = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\testing\predictions\average_values.csv'
 
 def get_user_input():
     """

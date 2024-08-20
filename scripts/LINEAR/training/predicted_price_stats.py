@@ -11,12 +11,24 @@ def generate_price_predictions(predictions_csv, output_dir, price_per_kwh):
     :param price_per_kwh: The price per kWh (in KSH) to use for calculating costs
     :return: None
     """
+    # Check if the CSV file exists
+    if not os.path.exists(predictions_csv):
+        raise FileNotFoundError(f"CSV file not found: {predictions_csv}")
+    
     # Load the predictions
     data = pd.read_csv(predictions_csv, index_col='Datetime', parse_dates=True)
     
+    # Check if the expected columns are present
+    if 'Actual' not in data.columns or 'Predicted' not in data.columns:
+        raise ValueError("CSV file must contain 'Actual' and 'Predicted' columns.")
+    
+    # Convert from Wh to kWh for better readability in plots
+    data['Actual_kWh'] = data['Actual'] / 1000.0
+    data['Predicted_kWh'] = data['Predicted'] / 1000.0
+    
     # Calculate actual and predicted prices using the constant price per kWh
-    data['Actual_Cost'] = data['Actual'] * price_per_kwh
-    data['Predicted_Cost'] = data['Predicted'] * price_per_kwh
+    data['Actual_Cost'] = data['Actual_kWh'] * price_per_kwh
+    data['Predicted_Cost'] = data['Predicted_kWh'] * price_per_kwh
     
     # Extract relevant time features
     data['Hour'] = data.index.hour
@@ -105,7 +117,7 @@ def generate_price_predictions(predictions_csv, output_dir, price_per_kwh):
 if __name__ == "__main__":
     # Define file paths
     predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\model_predictions.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\price_statistics'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\plots\price_statistics'
     
     # Set price per kWh
     price_per_kwh = 23.25  # KSH per kWh

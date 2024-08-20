@@ -12,6 +12,10 @@ def generate_power_statistics(predictions_csv, output_dir):
     """
     # Load the predictions
     data = pd.read_csv(predictions_csv, index_col='Datetime', parse_dates=True)
+
+    # Convert from Wh to kWh for better readability in plots
+    data['Actual_kWh'] = data['Actual'] / 1000.0
+    data['Predicted_kWh'] = data['Predicted'] / 1000.0
     
     # Extract relevant time features
     data['Hour'] = data.index.hour
@@ -20,22 +24,22 @@ def generate_power_statistics(predictions_csv, output_dir):
     
     # Aggregate power predictions by hour of the day
     hourly_stats = data.groupby('Hour').agg({
-        'Actual': ['mean', 'sum'],
-        'Predicted': ['mean', 'sum']
+        'Actual_kWh': ['mean', 'sum'],
+        'Predicted_kWh': ['mean', 'sum']
     })
     hourly_stats.columns = ['_'.join(col) for col in hourly_stats.columns]
     
     # Aggregate power predictions by day of the week
     daily_stats = data.groupby('DayOfWeek').agg({
-        'Actual': ['mean', 'sum'],
-        'Predicted': ['mean', 'sum']
+        'Actual_kWh': ['mean', 'sum'],
+        'Predicted_kWh': ['mean', 'sum']
     })
     daily_stats.columns = ['_'.join(col) for col in daily_stats.columns]
     
     # Aggregate power predictions by month of the year
     monthly_stats = data.groupby('Month').agg({
-        'Actual': ['mean', 'sum'],
-        'Predicted': ['mean', 'sum']
+        'Actual_kWh': ['mean', 'sum'],
+        'Predicted_kWh': ['mean', 'sum']
     })
     monthly_stats.columns = ['_'.join(col) for col in monthly_stats.columns]
     
@@ -58,8 +62,8 @@ def generate_power_statistics(predictions_csv, output_dir):
 
     # Plot hourly power statistics
     plt.subplot(3, 1, 1)
-    plt.plot(hourly_stats.index, hourly_stats['Actual_mean'], label='Actual Power', color='blue')
-    plt.plot(hourly_stats.index, hourly_stats['Predicted_mean'], label='Predicted Power', color='red', linestyle='--')
+    plt.plot(hourly_stats.index, hourly_stats['Actual_kWh_mean'], label='Actual Power', color='blue')
+    plt.plot(hourly_stats.index, hourly_stats['Predicted_kWh_mean'], label='Predicted Power', color='red', linestyle='--')
     plt.title('Average Power Consumption by Hour of the Day')
     plt.xlabel('Hour of the Day')
     plt.ylabel('Power Consumption (kWh)')
@@ -68,8 +72,8 @@ def generate_power_statistics(predictions_csv, output_dir):
     
     # Plot daily power statistics
     plt.subplot(3, 1, 2)
-    plt.plot(daily_stats.index, daily_stats['Actual_mean'], label='Actual Power', color='blue')
-    plt.plot(daily_stats.index, daily_stats['Predicted_mean'], label='Predicted Power', color='red', linestyle='--')
+    plt.plot(daily_stats.index, daily_stats['Actual_kWh_mean'], label='Actual Power', color='blue')
+    plt.plot(daily_stats.index, daily_stats['Predicted_kWh_mean'], label='Predicted Power', color='red', linestyle='--')
     plt.title('Average Power Consumption by Day of the Week')
     plt.xlabel('Day of the Week (0=Monday, 6=Sunday)')
     plt.ylabel('Power Consumption (kWh)')
@@ -78,8 +82,8 @@ def generate_power_statistics(predictions_csv, output_dir):
     
     # Plot monthly power statistics
     plt.subplot(3, 1, 3)
-    plt.plot(monthly_stats.index, monthly_stats['Actual_mean'], label='Actual Power', color='blue')
-    plt.plot(monthly_stats.index, monthly_stats['Predicted_mean'], label='Predicted Power', color='red', linestyle='--')
+    plt.plot(monthly_stats.index, monthly_stats['Actual_kWh_mean'], label='Actual Power', color='blue')
+    plt.plot(monthly_stats.index, monthly_stats['Predicted_kWh_mean'], label='Predicted Power', color='red', linestyle='--')
     plt.title('Average Power Consumption by Month of the Year')
     plt.xlabel('Month')
     plt.ylabel('Power Consumption (kWh)')
@@ -94,7 +98,7 @@ def generate_power_statistics(predictions_csv, output_dir):
 if __name__ == "__main__":
     # Define file paths
     predictions_file = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\data\model_predictions.csv'
-    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\power_statistics'
+    output_directory = r'C:\Users\BezylMophatOtieno\source\repos\household_power_consumption_predictive_analysis\scripts\LINEAR\training\outputs\plots\power_statistics'
     
     # Generate power statistics and plots
     generate_power_statistics(predictions_file, output_directory)

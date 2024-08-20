@@ -16,7 +16,7 @@ def prepare_data(input_csv, output_dir):
     data = pd.read_csv(input_csv, index_col='Datetime', parse_dates=['Datetime'])
     
     # Define the features and target variable
-    features = ['Current', 'Voltage', 'Load_1', 'Load_2']
+    features = ['Current', 'Voltage', 'Load(Wh)']
     target = 'Power'
     
     X = data[features]

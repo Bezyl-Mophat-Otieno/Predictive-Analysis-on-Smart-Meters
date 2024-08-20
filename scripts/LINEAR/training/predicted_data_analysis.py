@@ -18,24 +18,28 @@ def generate_statistics(predictions_csv, output_dir):
     data['DayOfWeek'] = data.index.dayofweek
     data['Month'] = data.index.month
     
+    # Convert from Wh to kWh for better readability in plots
+    data['Actual_kWh'] = data['Actual'] / 1000.0
+    data['Predicted_kWh'] = data['Predicted'] / 1000.0
+    
     # Aggregate predictions by hour of the day
     hourly_stats = data.groupby('Hour').agg({
-        'Actual': ['mean', 'sum'],
-        'Predicted': ['mean', 'sum']
+        'Actual_kWh': ['mean', 'sum'],
+        'Predicted_kWh': ['mean', 'sum']
     })
     hourly_stats.columns = ['_'.join(col) for col in hourly_stats.columns]
     
     # Aggregate predictions by day of the week
     daily_stats = data.groupby('DayOfWeek').agg({
-        'Actual': ['mean', 'sum'],
-        'Predicted': ['mean', 'sum']
+        'Actual_kWh': ['mean', 'sum'],
+        'Predicted_kWh': ['mean', 'sum']
     })
     daily_stats.columns = ['_'.join(col) for col in daily_stats.columns]
     
     # Aggregate predictions by month of the year
     monthly_stats = data.groupby('Month').agg({
-        'Actual': ['mean', 'sum'],
-        'Predicted': ['mean', 'sum']
+        'Actual_kWh': ['mean', 'sum'],
+        'Predicted_kWh': ['mean', 'sum']
     })
     monthly_stats.columns = ['_'.join(col) for col in monthly_stats.columns]
     
@@ -58,31 +62,31 @@ def generate_statistics(predictions_csv, output_dir):
 
     # Plot hourly statistics
     plt.subplot(3, 1, 1)
-    plt.plot(hourly_stats.index, hourly_stats['Actual_mean'], label='Actual', color='blue')
-    plt.plot(hourly_stats.index, hourly_stats['Predicted_mean'], label='Predicted', color='red', linestyle='--')
-    plt.title('Average Energy Consumption by Hour of the Day')
+    plt.plot(hourly_stats.index, hourly_stats['Actual_kWh_mean'], label='Actual', color='blue')
+    plt.plot(hourly_stats.index, hourly_stats['Predicted_kWh_mean'], label='Predicted', color='red', linestyle='--')
+    plt.title('Average Energy Consumption (kWh) by Hour of the Day')
     plt.xlabel('Hour of the Day')
-    plt.ylabel('Energy Consumption (Mean)')
+    plt.ylabel('Energy Consumption (kWh)')
     plt.legend()
     plt.grid(True)
     
     # Plot daily statistics
     plt.subplot(3, 1, 2)
-    plt.plot(daily_stats.index, daily_stats['Actual_mean'], label='Actual', color='blue')
-    plt.plot(daily_stats.index, daily_stats['Predicted_mean'], label='Predicted', color='red', linestyle='--')
-    plt.title('Average Energy Consumption by Day of the Week')
+    plt.plot(daily_stats.index, daily_stats['Actual_kWh_mean'], label='Actual', color='blue')
+    plt.plot(daily_stats.index, daily_stats['Predicted_kWh_mean'], label='Predicted', color='red', linestyle='--')
+    plt.title('Average Energy Consumption (kWh) by Day of the Week')
     plt.xlabel('Day of the Week (0=Monday, 6=Sunday)')
-    plt.ylabel('Energy Consumption (Mean)')
+    plt.ylabel('Energy Consumption (kWh)')
     plt.legend()
     plt.grid(True)
     
     # Plot monthly statistics
     plt.subplot(3, 1, 3)
-    plt.plot(monthly_stats.index, monthly_stats['Actual_mean'], label='Actual', color='blue')
-    plt.plot(monthly_stats.index, monthly_stats['Predicted_mean'], label='Predicted', color='red', linestyle='--')
-    plt.title('Average Energy Consumption by Month of the Year')
+    plt.plot(monthly_stats.index, monthly_stats['Actual_kWh_mean'], label='Actual', color='blue')
+    plt.plot(monthly_stats.index, monthly_stats['Predicted_kWh_mean'], label='Predicted', color='red', linestyle='--')
+    plt.title('Average Energy Consumption (kWh) by Month of the Year')
     plt.xlabel('Month')
-    plt.ylabel('Energy Consumption (Mean)')
+    plt.ylabel('Energy Consumption (kWh)')
     plt.legend()
     plt.grid(True)
     

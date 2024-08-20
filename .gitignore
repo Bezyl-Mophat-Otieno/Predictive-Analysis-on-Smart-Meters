@@ -3,5 +3,6 @@
 *.txt
 *.npz
 *.keras
+*.txt
 *.h5
 *.pkl
